@@ -12,14 +12,14 @@
 # Version: 0.0.1
 
 ## Set the working directiory
-setwd("C:/Users/46355/Desktop/PAH-Finder_Demo")
+setwd("C:/Users/46355/Desktop/test_1")
 
-demo <- read.csv("Demo_PAH-Finder.csv")
+demo <- read.csv("Demo_MSMS.csv")
 
 # Process each MSMS spectrum and store in a list
 List_MS_spectra <- lapply(demo$MSMS, MS_spectrum_extraction)
 
-molecular_ion_mz <- as.numeric(unlist(lapply(List_MS_spectra, Estimate_molecular_ion_mz)))
+molecular_ion_mz <- as.numeric(unlist(lapply(List_MS_spectra, Estimate_molecular_ion)))
 
 # Calculate each machine learning features respectively 
 # Rename and combine into a dataframe for prediction
@@ -31,7 +31,7 @@ RIR_4 <- Calculate_region_intensity_ratio(List_MS_spectra, molecular_ion_mz, 10.
 
 Spectral_features <- Calculate_spectral_features(List_MS_spectra, molecular_ion_mz)
 
-df_ML_features <- cbind(RIR_1, RiR_2_3, RIR_4, Spectral_features)
+df_ML_features <- cbind(RIR_1, RIR_2_3, RIR_4, Spectral_features)
 
 colnames(df_ML_features) <- c("RIR1","RIR2","RIR3","RIR4",
                               "Skewness", "Entropy", "BasePeakRatio")
