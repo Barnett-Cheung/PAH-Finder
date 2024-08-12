@@ -288,3 +288,4 @@ Predict_formula <- function(spectrum_df, ppm = 20, minElements = "C8H6", maxElem
   
   return(formula_result)
 }
+
